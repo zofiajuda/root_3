@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "Wykresy.C": "cpp",
+        "WidmoCsBin.C": "cpp",
+        "generate.C": "cpp",
+        "Wykresy2D.C": "cpp"
+    }
+}
