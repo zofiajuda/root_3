@@ -1,9 +1,11 @@
 void Wykresy2D()
 {
     const Int_t n = 4;
-    TGraph2D *graph = new TGraph2D(n); // stworzenie wykresu
+    int npoints = 91;
+    TGraph2D *graph = new TGraph2D(npoints * n); // stworzenie wykresu
     double energie[4] = {12., 20., 40., 65.};
-    for (int i = 0; i < 2; i++)
+    int it_point = 0;
+    for (int i = 0; i < n; i++)
     {
         TString nazwa = Form("pp0%.3fang.L01", energie[i]);
         fstream dane(nazwa, ios::in); // otwarcie pliku tekstowego do odczytu
@@ -13,18 +15,20 @@ void Wykresy2D()
         }
         else
         {
-            Double_t katy[n];
-            Double_t pczynny[n];
+            Double_t katy[npoints];
+            Double_t pczynny[npoints];
             Double_t dummy;
             TString naglowek;
-            for (Int_t i = 0; i < 5; i++)
+            for (Int_t ii = 0; ii < 5; ii++)
             { // wczytanie nagłówka pliku
                 naglowek.ReadLine(dane);
             }
-            for (Int_t j = 0; j < n; j++)
+            for (Int_t j = 0; j < npoints; j++)
             { // wczytanie danych liczbowych
                 dane >> katy[j] >> pczynny[j] >> dummy >> dummy;
-                graph->SetPoint(i, energie[i], katy[j], pczynny[j]);
+                // cout << energie[i] << "\t" << katy[j] << "\t" << pczynny[j] << endl;
+                graph->SetPoint(it_point, energie[i], katy[j], pczynny[j]);
+                it_point++;
             }
 
             // graph->SetMarkerStyle(20 + i); // formatowanie wykresu
